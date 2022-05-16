@@ -17,15 +17,11 @@ contract Reentrance {
     }
 
     function withdraw(uint256 _amount) public {
-        // console.log("%s requested withdraw of %s", msg.sender, _amount);
         if (balances[msg.sender] >= _amount) {
-            // console.log("sending amount...");
             (bool result, ) = msg.sender.call.value(_amount)("");
-            // console.log("result: %s", result);
             if (result) {
                 _amount;
             }
-            // console.log("deducting amount %s", _amount);
             balances[msg.sender] -= _amount;
         }
     }
