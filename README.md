@@ -1,15 +1,10 @@
-# Basic Sample Hardhat Project
+# Ethernaut Challenge Solutions
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+In this project we'll be solving [Ethernaut](https://ethernaut.openzeppelin.com/level/0x4E73b858fD5D7A5fc1c3455061dE52a53F35d966) riddles.
 
-Try running some of the following tasks:
+## Usage
 
 ```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
+npm i
 npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
 ```
