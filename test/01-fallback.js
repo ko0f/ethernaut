@@ -3,6 +3,11 @@ const { ethers } = require("hardhat");
 
 const value = ethers.utils.parseEther("0.0009");
 
+/**
+ * Contract will give ownership to sender, if it has contributed in the past 
+ * and now sends ether to the contract.
+ */
+
 describe("Fallback", function () {
 
     it("takes ownership of contract", async function () {

@@ -1,6 +1,11 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
+/**
+ * Contract uses a regular function as a constructor, allowing strangers
+ * to activate it and take ownership of the contract.
+ */
+
 describe("Fallout", function () {
 
     it("takes ownership of contract", async function () {

@@ -1,6 +1,12 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
+/**
+ * Contract formula for pseudo randomness can be easily calculated by
+ * a contract with the same code. This is used to anticipate the next 
+ * coin "flip" result.
+ */
+
 describe("CoinFlip", function () {
 
     it("guess 10 numbers", async function () {

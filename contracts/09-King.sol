@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 
+import "hardhat/console.sol";
+
 contract King {
     address payable king;
     uint public prize;
@@ -17,6 +19,7 @@ contract King {
         king.transfer(msg.value);
         king = msg.sender;
         prize = msg.value;
+        // console.log("set %s as king with %s eth", msg.sender, msg.value);
     }
 
     function _king() public view returns (address payable) {
