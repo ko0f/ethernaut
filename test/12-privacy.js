@@ -12,11 +12,6 @@ describe("Privacy", async () => {
     beforeEach(async () => {
         [owner, attacker, third] = await ethers.getSigners();;
 
-        // const PrivacyEncoder = await ethers.getContractFactory("PrivacyEncoder");
-        // const encoderContract = await PrivacyEncoder.deploy();
-        // await encoderContract.deployed();
-        // const input = await encoderContract.encode();
-
         const deployEncodedPassword1 = ethers.utils.formatBytes32String(password1);
         const deployEncodedPassword2 = ethers.utils.formatBytes32String(password2);
         const deployEncodedPassword3 = ethers.utils.formatBytes32String(password3);
@@ -37,7 +32,14 @@ describe("Privacy", async () => {
     });
 
     it("should read the password", async function () {
-        expect(await contract.locked()).to.be.true;
+        // expect(await contract.locked()).to.be.true;
+
+        console.log(`Storage #0: ${await ethers.provider.getStorageAt(contract.address, 0)}`);
+        console.log(`Storage #1: ${await ethers.provider.getStorageAt(contract.address, 1)}`);
+        console.log(`Storage #2: ${await ethers.provider.getStorageAt(contract.address, 2)}`);
+        console.log(`Storage #3: ${await ethers.provider.getStorageAt(contract.address, 3)}`);
+        console.log(`Storage #4: ${await ethers.provider.getStorageAt(contract.address, 4)}`);
+        console.log(`Storage #5: ${await ethers.provider.getStorageAt(contract.address, 5)}`);
 
         let encodedPassword = await ethers.provider.getStorageAt(contract.address, 5);
 
